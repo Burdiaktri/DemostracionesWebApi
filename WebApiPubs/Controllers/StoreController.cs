@@ -98,25 +98,16 @@ namespace WebApiPubs.Controllers
             return stores;
         }
 
-        [HttpGet("city/{city}")]
-        public ActionResult<IEnumerable<Store>> GetByCity(string city)
+        [HttpGet("city/{city}/{state}")]
+        public ActionResult<IEnumerable<Store>> GetByCity(string city, string state)
         {
             List<Store> stores = (from s in context.Stores
-                           where s.City == city
-                           select s).ToList();
+                                  where s.State == state && s.City == city
+                                  select s).ToList();
 
             return stores;
         }
 
-        [HttpGet("state/{state}")]
-        public ActionResult<IEnumerable<Store>> GetByState(string state)
-        {
-            List<Store> stores = (from s in context.Stores
-                           where s.State == state
-                           select s).ToList();
-
-            return stores;
-        }
 
     }
 }
